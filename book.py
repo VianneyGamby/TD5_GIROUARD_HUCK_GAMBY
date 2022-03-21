@@ -3,7 +3,7 @@ import abc
 class Book:
     def __init__(self, name):
         self.name = name   
-        self.order = []
+        self.order = []  
 
     def insert_buy(self, quantite, price):
         orderbuy = BuyOrder(quantite=quantite, price=price)
@@ -23,7 +23,7 @@ class Book:
             print(f"         {self.order[i]} id={i}")
         print(f"------------------------")
 
-class Order(metaclass=abc.ABCMeta): 
+class Order(): 
     def __init__(self, quantite, price):
         self.quantite = quantite
         self.price = price
