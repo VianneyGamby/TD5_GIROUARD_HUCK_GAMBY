@@ -7,8 +7,21 @@ class Book:
         self.order = [] 
         self.executed = [] 
 
+    def __str__(self):
+        dicsell = {}
+        dicbuy = {}
+        for i in range(len(self.order)):
+            text = self.order[i].__str__()
+            if "SELL" in text :
+                dicsell[str(i)] = ["SELL",str(self.order[i].quantite),str(self.order[i].price)]
+            else :
+                dicbuy[str(i)] = ["BUY",str(self.order[i].quantite),str(self.order[i].price)]
+        sell = pd.DataFrame(dicsell,index = ['Operation','Quantity','Dollars'])
+        buy = pd.DataFrame(dicbuy,index = ['Operation','Quantity','Dollars'])
+        with pd.option_context('display.max_rows',None,'display.max_columns',None,'display.precision',3,):
+            return ("Book Buy------------------------\n" +  buy.to_string() + "\nBook Sell-----------------------" + sell.to_string())    
     
-    def executeorder(self,typeorder):
+   def executeorder(self,typeorder):
         tab = []
         q = self.order[len(self.order)-1].quantite
         for i in range(len(self.order)-2):
