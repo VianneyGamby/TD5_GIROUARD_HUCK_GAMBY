@@ -1,5 +1,11 @@
-#!/bin/venv
-.\venv\Scripts\activate
-py -m pip install requests
-py -m pip install -r requirements.txt
-python3 main.py
+#!/usr/bin/venv bash
+
+if [ ! -d ".env" ]; then
+	python3 -m venv .env
+	source .env/bin/activate
+	pip install -r requirements.txt
+else
+	source .env/bin/activate
+fi
+
+./main.py
